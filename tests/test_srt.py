@@ -1,4 +1,4 @@
-from gen_subtitles.srt import Cue, format_timestamp, write_srt
+from subgen.srt import Cue, format_timestamp, write_srt
 
 
 def test_format_timestamp_zero():

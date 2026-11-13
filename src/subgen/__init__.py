@@ -1,1 +1,1 @@
-"""gen_subtitles — generate .srt subtitles from video, in any language."""
+"""subgen — generate .srt subtitles from video, in any language."""

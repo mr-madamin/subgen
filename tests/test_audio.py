@@ -1,4 +1,4 @@
-from gen_subtitles.audio import AudioTrack, _parse_streams
+from subgen.audio import AudioTrack, _parse_streams
 
 
 def test_parse_undefined_language_becomes_none():
