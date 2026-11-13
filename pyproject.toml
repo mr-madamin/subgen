@@ -1,5 +1,5 @@
 [project]
-name = "gen-subtitles"
+name = "subgen"
 version = "0.1.0"
 description = "Generate .srt subtitles from video files, in any language"
 readme = "README.md"
@@ -10,7 +10,7 @@ requires-python = ">=3.12"
 dependencies = []
 
 [project.scripts]
-subtitle = "gen_subtitles.cli:main"
+subtitle = "subgen.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]
