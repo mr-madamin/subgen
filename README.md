@@ -1,4 +1,4 @@
-# gen_subtitles
+# subgen
 
 Generate accurate `.srt` subtitles for any video, in **any language**, 100% locally.
 
