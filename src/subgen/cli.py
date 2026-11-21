@@ -13,6 +13,12 @@ def cmd_tracks(args):
 
 
 def cmd_extract(args):
+    tracks = probe_tracks(args.video)
+    indices = {t.index for t in tracks}
+    if args.track not in indices:
+        raise SystemExit(
+            f"track {args.track} is not an audio stream; available: {sorted(indices)}"
+        )
     out = extract_audio(args.video, args.out, args.track)
     print(f"wrote {out}")
 
