@@ -23,7 +23,7 @@ uv sync
 uv run subtitle movie.mkv                         # writes movie.<lang>.srt next to the video
 uv run subtitle *.mkv *.avi                       # batch; models load once
 uv run subtitle movie.mkv --lang es               # force the audio language (default: auto-detect)
-uv run subtitle movie.mkv --track 2               # force audio track (0 = first audio track)
+uv run subtitle movie.mkv --track 2               # force audio track by absolute stream index (see `tracks`)
 uv run subtitle movie.mkv --prompt "Almodóvar, Pepa, Lucía"   # name/slang hints
 uv run subtitle movie.mkv --model large-v3        # bigger model, slower, more accurate
 ```
