@@ -7,7 +7,9 @@ authors = [
     { name = "Daler", email = "8993696+mr-madamin@users.noreply.github.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "faster-whisper>=1.2.1",
+]
 
 [project.scripts]
 subtitle = "subgen.cli:main"
