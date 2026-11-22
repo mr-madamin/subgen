@@ -1,6 +1,9 @@
 import argparse
+from pathlib import Path
 
 from .audio import extract_audio, probe_tracks
+from .srt import write_srt
+from .transcribe import transcribe
 
 
 def cmd_tracks(args):
@@ -23,6 +26,15 @@ def cmd_extract(args):
     print(f"wrote {out}")
 
 
+def cmd_transcribe(args):
+    lang = None if args.lang == "auto" else args.lang
+    cues, detected = transcribe(args.video, lang=lang, model_name=args.model)
+    out = Path(args.video).with_suffix("")
+    out = out.with_name(f"{out.name}.{detected}.srt")
+    write_srt(cues, out)
+    print(f"wrote {out} ({len(cues)} cues, {detected})")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="subtitle", description="...")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -36,6 +48,12 @@ def main() -> None:
     p_extract.add_argument("-o", "--out", required=True)
     p_extract.add_argument("--track", type=int, required=True)
     p_extract.set_defaults(func=cmd_extract)
+
+    p_tx = sub.add_parser("transcribe", help="transcribe to .srt")
+    p_tx.add_argument("video")
+    p_tx.add_argument("--lang", default="auto", help="auto | en | es | …")
+    p_tx.add_argument("--model", default="small", help="small | large-v3 | …")
+    p_tx.set_defaults(func=cmd_transcribe)
 
     args = parser.parse_args()
     args.func(args)

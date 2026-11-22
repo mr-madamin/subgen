@@ -1,4 +1,3 @@
-# in transcribe.py
 from faster_whisper import WhisperModel
 
 from .srt import Cue
