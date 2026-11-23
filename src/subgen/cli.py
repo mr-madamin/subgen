@@ -36,7 +36,10 @@ def cmd_transcribe(args):
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(prog="subtitle", description="...")
+    parser = argparse.ArgumentParser(
+        prog="subtitle",
+        description="Generate .srt subtitles from video files, in any language",
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_tracks = sub.add_parser("tracks", help="list audio tracks")
