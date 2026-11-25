@@ -1,6 +1,6 @@
 import unicodedata
 
-from subgen.languages import match_title, normalize
+from subgen.languages import LANGUAGES, match_title, normalize
 
 
 def test_normalize_three_letter_tag():
@@ -43,3 +43,11 @@ def test_match_title_decomposed_unicode():
     title = unicodedata.normalize("NFD", "Español 5.1")
     assert title != "Español 5.1"
     assert match_title(title) == "es"
+
+
+def test_keywords_are_nfc():
+    for lang in LANGUAGES:
+        for keyword in lang.keywords:
+            assert unicodedata.is_normalized("NFC", keyword), (
+                f"{lang.code2}: {keyword!r} is not NFC"
+            )
