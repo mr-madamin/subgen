@@ -102,3 +102,31 @@ def test_pick_track_single_untagged_track_raises():
 def test_pick_track_auto_takes_first():
     tracks = [_track(1), _track(2)]
     assert pick_track(tracks) == tracks[0]
+
+
+def test_pick_track_unlabeled_track_before_match():
+    tracks = [_track(1, None), _track(2, "spa")]
+    assert pick_track(tracks, "es") == tracks[1]
+
+
+def test_pick_track_known_tags_no_match():
+    tracks = [_track(1, "eng"), _track(2, "eng")]
+    with pytest.raises(TrackError):
+        pick_track(tracks, "es")
+
+
+def test_pick_track_first_of_two_title_matches():
+    tracks = [_track(1, None, "Español"), _track(2, None, "Spanish")]
+    assert pick_track(tracks, "es") == tracks[0]
+
+
+def test_pick_track_lang_is_normalized():
+    tracks = [_track(1, "spa")]
+    assert pick_track(tracks, "ES") == tracks[0]
+    assert pick_track(tracks, "spa") == tracks[0]
+
+
+def test_pick_track_no_tracks():
+    tracks = []
+    with pytest.raises(TrackError):
+        pick_track(tracks, None)
